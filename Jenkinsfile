@@ -1,4 +1,4 @@
-{
+pipeline{
     agent {
         label 'SRVC0001'
     }
