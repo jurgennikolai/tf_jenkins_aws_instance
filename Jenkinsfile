@@ -4,9 +4,10 @@ pipeline{
     }
 
     stages{
-        stage('Test'){
+        stage('Init'){
             steps{
-                sh "hostnamectl; terraform -v;"
+                git "https://github.com/jurgennikolai/tf_jenkins_aws_instance"
+                sh "ls -l"
             }
         }
     }
