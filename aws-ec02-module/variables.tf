@@ -2,13 +2,11 @@ locals {
   conf = {
     auth = {
         region      = "us-east-1"
-        access_key  = "AKIAWEV65ZSIELSYEQM5"
-        secret_key  = "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" 
     }
 
     instance = {
         tags_name = { 
-            Name = "Terraform-Test-01" 
+            Name = "${var.instance_name}"
         }
         ami     = "ami-08a52ddb321b32a8c"
         type    = "t2.micro"
@@ -29,4 +27,10 @@ locals {
     }
 
   }
+}
+
+variable "instance_name" {
+    type = string
+    default = "Terraform-Test-01"  
+    description = "Instance Name"
 }
