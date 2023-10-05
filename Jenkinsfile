@@ -25,7 +25,7 @@ pipeline{
                     ok "Si, continuemos."
                     submitter "srvjenkins"
                     parameters{
-                        string(name: 'ANY_VALUE', defaultValue: 'Holaaaaaaaaaa', description 'Escribe cualquier valor: ')
+                        string(name: 'ANY_VALUE', defaultValue: 'Holaaaaaaaaaa', description: 'Escribe cualquier valor: ')
                     }
                 }
             }
