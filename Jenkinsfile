@@ -19,14 +19,18 @@ pipeline{
         }
 
         stage('Input Test'){
+            input{
+                message "¿Quieres continuar?"
+                ok "Si, continuemos."
+                submitter "srvjenkins"
+                parameters {
+                    string(name: 'ANY_VALUE', defaultValue: 'Holaaaaaaaaaa', description: 'Escribe cualquier valor: ')
+                }
+            }
             steps{
-                input{
-                    message "¿Quieres continuar?"
-                    ok "Si, continuemos."
-                    submitter "srvjenkins"
-                    parameters{
-                        string(name: 'ANY_VALUE', defaultValue: 'Holaaaaaaaaaa', description: 'Escribe cualquier valor: ')
-                    }
+
+                step{
+                    echo "Cualquier valor ${ANY_VALUE}"
                 }
             }
         }
