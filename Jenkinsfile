@@ -28,10 +28,7 @@ pipeline{
                 }
             }
             steps{
-
-                step{
-                    echo "Cualquier valor ${ANY_VALUE}"
-                }
+                echo "Cualquier valor ${ANY_VALUE}"
             }
         }
     }
