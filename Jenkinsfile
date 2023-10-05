@@ -9,13 +9,25 @@ pipeline{
     }
 
     stages{
-        stage('Init'){
+        stage('Clone Repository'){
             steps{
                 dir("${params.REPO_SRC}"){
-                    git "https://github.com/jurgennikolai/tf_jenkins_aws_instance"
+                    git "https://github.com/jurgennikolai/${params.REPO_SRC}"
                     sh 'pwd; ls -l'
                 }
-                sh "pwd; ls -l"
+            }
+        }
+
+        stage('Input Test'){
+            steps{
+                input{
+                    message "¿Quieres continuar?"
+                    ok "Si, continuemos."
+                    submitter "srvjenkins"
+                    parameters{
+                        string(name: 'ANY_VALUE', defaultValue: 'Holaaaaaaaaaa', description 'Escribe cualquier valor: ')
+                    }
+                }
             }
         }
     }
