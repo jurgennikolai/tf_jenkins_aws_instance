@@ -6,8 +6,11 @@ pipeline{
     stages{
         stage('Init'){
             steps{
-                git "https://github.com/jurgennikolai/tf_jenkins_aws_instance"
-                sh "ls -l"
+                dir('tf_jenkins_aws_instance'){
+                    git "https://github.com/jurgennikolai/tf_jenkins_aws_instance"
+                    sh 'pwd; ls -l'
+                }
+                sh "pwd; ls -l"
             }
         }
     }
