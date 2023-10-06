@@ -48,7 +48,7 @@ pipeline{
             }
             steps{
                 dir("${params.REPO_SRC}"){
-                    sh 'terraform apply'
+                    sh 'terraform apply -auto-approve'
                 }
             }
         }
@@ -61,7 +61,7 @@ pipeline{
             }
             steps{
                 dir("${params.REPO_SRC}"){
-                    sh 'terraform apply'
+                    sh 'terraform destroy -auto-approve'
                 }
             }
         }
