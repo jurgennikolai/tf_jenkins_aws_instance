@@ -1,4 +1,4 @@
 module "ec02_module" {
     source = "./aws-ec02-module"  
-    instance_name = "Prueba"
+    instance_name = "Terraform-Automation-Test"
 }
