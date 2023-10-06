@@ -9,8 +9,6 @@ terraform {
 
 provider "aws" {
     region      = local.conf.auth.region
-    access_key  = local.conf.auth.access_key
-    secret_key  = local.conf.auth.secret_key
 }
 
 resource "aws_instance" "Terraform-test-02" {
