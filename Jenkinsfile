@@ -4,11 +4,17 @@ pipeline{
         string(name: 'REPO_SRC', defaultValue : 'tf_jenkins_aws_instance', description: "Directory where the repository was cloned")
     }
 
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+    }
+
     agent {
         label 'SRVC0001'
     }
 
     stages{
+
         stage('Clone Repository'){
             steps{
                 dir("${params.REPO_SRC}"){
@@ -18,18 +24,47 @@ pipeline{
             }
         }
 
-        stage('Input Test'){
-            input{
-                message "¿Quieres continuar?"
-                ok "Si, continuemos."
-                submitter "srvjenkins"
-                parameters {
-                    string(name: 'ANY_VALUE', defaultValue: 'Holaaaaaaaaaa', description: 'Escribe cualquier valor: ')
+        stage('Terraform Init'){
+            steps{
+                dir("${params.REPO_SRC}"){
+                    sh 'terraform init'
                 }
             }
+        }
+
+        stage('Terraform Plan'){
             steps{
-                echo "Cualquier valor ${ANY_VALUE}"
+                dir("${params.REPO_SRC}"){
+                    sh 'terraform plan'
+                }
             }
         }
+
+        stage('Terraform Apply'){
+            input{
+                message "Do you want to continue?"
+                ok "Yes"
+                submitter "srvjenkins"
+            }
+            steps{
+                dir("${params.REPO_SRC}"){
+                    sh 'terraform apply'
+                }
+            }
+        }
+
+        stage('Terraform Destroy'){
+            input{
+                message "Do you want to continue?"
+                ok "Yes"
+                submitter "srvjenkins"
+            }
+            steps{
+                dir("${params.REPO_SRC}"){
+                    sh 'terraform apply'
+                }
+            }
+        }
+ 
     }
 }
